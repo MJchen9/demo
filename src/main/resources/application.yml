@@ -1,0 +1,60 @@
+server:
+  port: 9001
+  tomcat:
+    basedir: /opt/upload_tmp
+
+spring:
+  application:
+    name: demo
+  datasource:
+    username: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+
+  redis:
+      database: 0
+      lettuce:
+        pool:
+          max-active: 600
+          max-idle: 300
+          min-idle: 0
+          max-wait: 1000ms
+      timeout: P1D
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml,mapper/extend/*.xml
+  type-aliases-package: com.example.domain
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+  file.max-size: 10MB
+  level:
+    root: INFO
+  file:
+    name: "./logs/my.log"
+---
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://101.132.105.140:3306/mxc_uat?tinyInt1isBit=false
+    password: Aa123987
+  redis:
+    host: 101.132.105.140
+    password: 123456
+    port: 6779
+---
+
+
+
+
+
+
+
+
+
